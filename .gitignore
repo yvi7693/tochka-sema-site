@@ -1,0 +1,8 @@
+/*
+!/.gitignore
+!/README.md
+!/site/
+site/.openai/
+.DS_Store
+__pycache__/
+*.pyc
