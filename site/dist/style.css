@@ -523,3 +523,6 @@ body .menu-panel-text p{font-size:15px!important}
 
 /* refresh26: до появления (см. app.js) кнопки-вкладки скрыты. */
 .menu-tablist.is-waiting .menu-tab{opacity:0}
+
+/* refresh27: до первого появления (см. steps.js) этапы скрыты. */
+.steps-list.is-waiting .step{opacity:0}
