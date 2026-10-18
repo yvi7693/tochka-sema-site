@@ -2,10 +2,10 @@
 (()=>{
 const reduce=matchMedia('(prefers-reduced-motion: reduce)');if(reduce.matches||!('IntersectionObserver' in window))return;
 const root=document.documentElement;root.classList.add('motion');
-// Анимированы только акценты: первый экран, карточки меню и текст на видео «Ваш повод — наш огонь». Остальное показывается сразу.
+// Анимированы только акценты: первый экран, вкладки меню и текст на видео «Ваш повод — наш огонь». Остальное показывается сразу.
 const headings=[...document.querySelectorAll('.hero-copy h1')];headings.forEach(h=>h.classList.add('reveal'));
 // Соседние элементы одной группы появляются по очереди.
-const groups=['.hero-bottom>*','.kitchen-item','.gathering-copy'];
+const groups=['.hero-bottom>*','.menu-tabs','.gathering-copy'];
 const blocks=[];groups.forEach(sel=>document.querySelectorAll(sel).forEach((el,n)=>{el.classList.add('reveal');el.style.setProperty('--d',`${Math.min(n,4)*60}ms`);blocks.push(el)}));
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');observer.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -8% 0px'});
 [...headings,...blocks].forEach(el=>observer.observe(el));
