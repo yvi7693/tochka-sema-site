@@ -424,12 +424,12 @@ body .steps .step-inner p{font-size:16px!important;line-height:1.7}
 #eventGallery .dotnav-play svg{width:16px;height:16px;fill:currentColor}
 #eventGallery .dotnav-play .icon-play,#eventGallery .dotnav-play.is-paused .icon-pause{display:none}
 #eventGallery .dotnav-play.is-paused .icon-play{display:block}
-/* Появление (как у Apple): круг проявляется, раскрывается в капсулу, затем по очереди появляются точки и кнопка паузы. */
-.motion #eventGallery .dotnav-pill{clip-path:inset(0 0 round 28px);transition:opacity .4s ease-out,transform .5s cubic-bezier(.34,1.3,.64,1),clip-path .75s cubic-bezier(.4,0,.25,1) .35s}
-.motion #eventGallery .dotnav-bar:not(.is-shown) .dotnav-pill{opacity:0;transform:scale(.6);clip-path:inset(0 calc(50% - 28px) round 28px)}
-.motion #eventGallery .dotnav-bar:not(.is-shown) .slide-dots button{opacity:0;transform:scale(.5)}
-.motion #eventGallery .dotnav-bar.is-shown .slide-dots button{transition-delay:calc(.75s + var(--i)*70ms)}
-.motion #eventGallery .dotnav-bar:not(.is-shown) .dotnav-play{opacity:0;transform:scale(.5)}
-.motion #eventGallery .dotnav-bar.is-shown .dotnav-play{transition:background-color .2s,transform .55s cubic-bezier(.34,1.3,.64,1) .9s,opacity .4s ease-out .9s}
+/* refresh10: капсула прилипает к низу экрана, пока видна галерея, затем остаётся под ней (как у Apple).
+   overflow:clip вместо hidden — иначе sticky не работает. Появление анимирует events.js. */
+.gallery-journey .gallery-stage{overflow:clip}
+#eventGallery .dotnav-bar{position:sticky;bottom:20px;z-index:6}
+#eventGallery .dotnav-pill{justify-content:center;overflow:hidden}
+.motion #eventGallery .dotnav-bar:not(.is-shown){visibility:hidden}
+@media(max-width:760px){#eventGallery .dotnav-bar{bottom:84px}}
 @media(prefers-reduced-motion:reduce){#eventGallery .slide-dots button[aria-pressed=true] .dot i{width:100%}#eventGallery .dotnav-play{display:none}}
 @media(max-width:760px){#eventGallery .dotnav-pill{height:48px;padding:0 12px}#eventGallery .slide-dots button{padding:0 6px}#eventGallery .dotnav-play{width:48px;height:48px;min-width:48px;min-height:48px}}
