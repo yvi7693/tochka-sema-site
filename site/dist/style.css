@@ -528,3 +528,19 @@ body #menu .kitchen-grid .kitchen-item:hover p,body #menu .kitchen-grid .kitchen
 /* refresh36: заголовок «Как мы работаем» и этапы начинаются на уровне верхнего края фото, а не по центру. */
 .steps-text{justify-content:flex-start}
 .steps-head .eyebrow{margin-top:0;line-height:1}
+
+/* refresh38: запасные стили для старых браузеров (Safari до 15 — iOS 14, macOS Big Sur и т. п.),
+   где нет aspect-ratio, единиц svh и свойства inset. Без них карточки меню и галерея схлопываются в ноль. */
+#menu .kitchen-item figure,#menu .kitchen-item figure::after{top:0;right:0;bottom:0;left:0}
+@supports not (aspect-ratio:1/1){
+#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{height:0;padding-bottom:125%}
+.gallery-journey .event-track{height:0!important;padding-bottom:75%}
+.gallery-journey .event-slide{top:0;right:0;bottom:0;left:0}
+.steps.is-static .steps-visual{height:0;padding-bottom:75%}
+@media(max-width:760px){#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{padding-bottom:100%}}
+}
+@supports not (height:1svh){
+.hero-sticky{height:100vh}
+.steps{height:300vh}
+.steps-sticky{height:100vh}
+}
