@@ -526,3 +526,6 @@ body .menu-panel-text p{font-size:15px!important}
 
 /* refresh27: до первого появления (см. steps.js) этапы скрыты. */
 .steps-list.is-waiting .step{opacity:0}
+
+/* refresh29: до первого появления (см. motion.js) содержимое блока вопросов скрыто. */
+#faq.is-waiting .faq-heading>*,#faq.is-waiting details{opacity:0}
