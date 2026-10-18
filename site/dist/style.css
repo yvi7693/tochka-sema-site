@@ -544,3 +544,15 @@ body #menu .kitchen-grid .kitchen-item:hover p,body #menu .kitchen-grid .kitchen
 .steps{height:300vh}
 .steps-sticky{height:100vh}
 }
+
+/* refresh39: высота карточек меню больше не зависит от aspect-ratio. Её задаёт фото внутри (padding-bottom 125%,
+   на телефоне 100%), фото и затемнение лежат поверх. Так карточки не схлопываются ни в старых браузерах,
+   ни в Safari 15, где aspect-ratio у растянутого элемента сетки игнорируется. */
+#menu .kitchen-grid{align-items:start}
+#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{aspect-ratio:auto;height:auto;padding-bottom:0;align-self:start}
+#menu .kitchen-item figure{position:relative;top:auto;right:auto;bottom:auto;left:auto;height:0;padding-bottom:125%;overflow:hidden}
+#menu .kitchen-item figure img{position:absolute;top:0;left:0;width:100%;height:100%}
+#menu .kitchen-item figure::after{z-index:1}
+#menu .kitchen-item>div{z-index:2}
+@media(max-width:760px){#menu .kitchen-item figure{padding-bottom:100%}}
+@supports not (aspect-ratio:1/1){#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{height:auto;padding-bottom:0}}
