@@ -442,3 +442,23 @@ body .steps .step-inner p{font-size:16px!important;line-height:1.7}
 #eventGallery .slide-dots button[aria-pressed=true] .dot{width:28px;background:rgba(43,43,43,.14)}
 #eventGallery .slide-dots .dot i{background:#2b2b2b}
 @media(max-width:760px){#eventGallery .dotnav-pill{height:32px;padding:0 10px}#eventGallery .slide-dots button{padding:0 5px}}
+
+/* refresh13: капсула заметнее на фоне; анимации сдержаннее. */
+#eventGallery .dotnav-pill{background:rgba(236,214,199,.9);box-shadow:none}
+#eventGallery .slide-dots .dot{background:rgba(43,43,43,.32)}
+#eventGallery .slide-dots button[aria-pressed=true] .dot{background:rgba(43,43,43,.18)}
+.motion #eventGallery .dotnav-bar:not(.is-shown){visibility:hidden}
+.motion .reveal{transform:translate3d(0,16px,0);transition:opacity .6s var(--ease-out),transform .7s var(--ease-out);transition-delay:var(--d,0ms)}
+.motion .hero-bottom>.reveal{--d:150ms}.motion .hero-bottom>.reveal+.reveal{--d:220ms}.motion .scroll-hint.reveal{--d:300ms}
+.motion .kitchen-item.reveal img,.motion .kitchen-item.reveal.is-in img{transform:none;transition:transform .6s var(--ease-out)}
+.motion .steps-visual.reveal{clip-path:none;opacity:0;transform:translate3d(0,16px,0);transition:opacity .6s var(--ease-out),transform .7s var(--ease-out)}
+.motion .steps-visual.reveal.is-in{opacity:1;transform:none}
+.steps-visual img{transform:none}
+.scroll-hint a{animation:none}
+@media(hover:hover){
+.kitchen-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px #2b1a1010}
+.motion .kitchen-item.reveal.is-in:hover img,.kitchen-item:hover img{transform:scale(1.02)}
+.button:hover,.callback-toggle:hover{transform:none;box-shadow:none}
+.footer-nav a:hover{transform:none}
+}
+.button:active,.mobile-cta a:active{transform:none}

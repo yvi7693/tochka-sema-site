@@ -15,10 +15,8 @@ function navigate(delta){if(busy)return;render(index+delta,true,Math.sign(delta)
 root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();navigate(e.key==='ArrowRight'?1:-1)}});let x=0,y=0;viewport.addEventListener('touchstart',e=>{x=e.touches[0].clientX;y=e.touches[0].clientY},{passive:true});viewport.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))navigate(dx<0?1:-1)},{passive:true});new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync()},{threshold:.15}).observe(root);
 // Капсула точек появляется один раз, когда при прокрутке целиком входит в экран.
 function showBar(){bar.classList.add('is-shown');if(!document.documentElement.classList.contains('motion')){sync();return}
-const pill=bar.querySelector('.dotnav-pill'),width=pill.offsetWidth,size=pill.offsetHeight,pop='cubic-bezier(.34,1.45,.64,1)',smooth='cubic-bezier(.65,0,.35,1)';
-pill.animate([{width:size+'px',opacity:0,transform:'scale(.6)',easing:pop},{width:size+'px',opacity:1,transform:'scale(1)',offset:.3,easing:smooth},{width:width+'px',opacity:1,transform:'scale(1)'}],{duration:1050});
-[...dots.children].forEach((b,n)=>b.animate([{opacity:0,transform:'scale(.4)'},{opacity:1,transform:'scale(1)'}],{duration:450,delay:650+n*60,easing:'cubic-bezier(.215,.61,.355,1)',fill:'backwards'}));
-setTimeout(refresh,900)}
+bar.querySelector('.dotnav-pill').animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:450,easing:'cubic-bezier(.215,.61,.355,1)'});
+setTimeout(refresh,300)}
 function checkBar(){const r=bar.getBoundingClientRect();if(r.height&&r.top>=0&&r.bottom<=innerHeight){removeEventListener('scroll',checkBar);removeEventListener('resize',checkBar);showBar()}}
 addEventListener('scroll',checkBar,{passive:true});addEventListener('resize',checkBar);checkBar();document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',refresh);state(0,false);refresh();
 const video=document.querySelector('#dinnerVideo');let videoVisible=false;
