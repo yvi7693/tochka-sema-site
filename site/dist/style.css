@@ -480,3 +480,12 @@ body .steps .step-inner p{font-size:16px!important;line-height:1.7}
 .steps-text{display:contents}
 .steps-head{grid-row:1}.steps-visual{grid-row:2}.steps-list{grid-row:3;min-height:0}
 }
+
+/* refresh19: блок контактов по 12-колоночной сетке общего контейнера (1210 px, как у остальных разделов), промежуток 24 px.
+   Текст — колонки 1–5, форма — 7–12; поля формы по 3 колонки, промежуток между ними равен промежутку сетки. */
+#contact .contact-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:32px;max-width:1210px;margin-inline:auto;align-items:start}
+#contact .contact-grid>div{grid-column:1 / span 5;text-align:left}
+#contact .contact-grid>form{grid-column:7 / span 6;min-width:0}
+#contact .form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
+@media(max-width:1024px){#contact .contact-grid>div{grid-column:1 / span 5}#contact .contact-grid>form{grid-column:6 / span 7}}
+@media(max-width:760px){#contact .contact-grid>div,#contact .contact-grid>form{grid-column:1 / -1}#contact .form-row{column-gap:14px}}
