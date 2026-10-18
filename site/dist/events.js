@@ -14,9 +14,27 @@ function refresh(){progress?.cancel();progress=null;if(reduce.matches)return;con
 function navigate(delta){if(busy)return;render(index+delta,true,Math.sign(delta));refresh()}
 root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();navigate(e.key==='ArrowRight'?1:-1)}});let x=0,y=0;viewport.addEventListener('touchstart',e=>{x=e.touches[0].clientX;y=e.touches[0].clientY},{passive:true});viewport.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))navigate(dx<0?1:-1)},{passive:true});new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync()},{threshold:.15}).observe(root);
 // Капсула точек появляется один раз, когда при прокрутке целиком входит в экран.
+// Появление капсулы — та же хореография, что у apple.com/airpods-pro (их main.built.js: AAP playIntroAnimation),
+// пружины с теми же жёсткостью/демпфированием и таймингами; размеры масштабированы под высоту нашей капсулы (у Apple 56 px).
+function spring(value,apply,o){const s={x:value,v:0,t:value,k:o.k??(2*Math.PI/o.d)**2,c:o.c??4*Math.PI*(1-(o.b||0))/o.d,apply};apply(value);return s}
+// Весь сценарий идёт по одним часам кадров: шаги срабатывают по прошедшему времени, пружины считаются мелкими шагами.
+function play(steps,springs,done){let start=0,prev=0,i=0;const h=1/240;steps.sort((a,b)=>a[0]-b[0]);
+requestAnimationFrame(function frame(now){if(!start)start=prev=now;const t=(now-start)/1000,dt=Math.min(1/30,(now-prev)/1000);prev=now;
+while(i<steps.length&&steps[i][0]<=t)steps[i++][1]();let moving=false;
+for(const s of springs){for(let n=Math.round(dt/h);n>0;n--){s.v+=(-s.k*(s.x-s.t)-s.c*s.v)*h;s.x+=s.v*h}if(Math.abs(s.x-s.t)<.01&&Math.abs(s.v)<.01){s.x=s.t;s.v=0}else moving=true;s.apply(s.x)}
+if(i<steps.length||moving)requestAnimationFrame(frame);else done()})}
 function showBar(){bar.classList.add('is-shown');if(!document.documentElement.classList.contains('motion')){sync();return}
-bar.querySelector('.dotnav-pill').animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:450,easing:'cubic-bezier(.215,.61,.355,1)'});
-setTimeout(refresh,300)}
+const pill=bar.querySelector('.dotnav-pill'),bg=pill.querySelector('.dotnav-bg'),blob=pill.querySelector('.dotnav-blob'),items=[...dots.children],H=pill.offsetHeight,W=pill.offsetWidth,f=H/56;
+const activeDot=dots.children[index].querySelector('.dot'),dotW=6,activeW=28;activeDot.style.transition='none';
+const barY=spring(180,v=>bar.style.transform=`translateY(${v}px)`,{k:100,c:8});
+const blobW=spring(30*f,v=>blob.style.width=v+'px',{k:100,c:8}),blobH=spring(80*f,v=>blob.style.height=v+'px',{k:100,c:8}),blobS=spring(1.3,v=>blob.style.transform=`translate(-50%,-50%) scale(${v})`,{d:.5});
+const bgW=spring(40*f,v=>bg.style.width=v+'px',{k:100,c:10}),bgH=spring(36*f,v=>bg.style.height=v+'px',{k:100,c:10}),bgS=spring(1.3,v=>bg.style.transform=`translate(-50%,-50%) scale(${v})`,{d:.3}),alpha=spring(0,v=>bg.style.setProperty('--alpha',v),{k:100,c:20});
+const intro=spring(0,v=>activeDot.style.width=dotW+(activeW-dotW)*v+'px',{k:200,c:20});
+const dotX=items.map(b=>{b.style.transition='none';b.style.opacity='0';return spring(36*f,v=>b.style.transform=`translateX(${v}px)`,{k:200,c:20})});
+bg.style.opacity='0';
+const steps=[[.02,()=>{blob.style.opacity='1';bg.style.opacity='1';blobS.t=.8}],[.03,()=>barY.t=0],[.05,()=>blobW.t=56*f],[.15,()=>blobH.t=56*f],[.3,()=>bgS.t=1],[.5,()=>bgW.t=W],[.52,()=>{blob.style.opacity='0';alpha.t=1}],[.7,()=>bgH.t=H],[.9,refresh],
+...items.map((b,n)=>[.74+.02*n,()=>{if(n===0)intro.t=1;dotX[n].t=0;b.style.transition='opacity .1s ease-in';b.style.opacity='1'}])];
+play(steps,[barY,blobW,blobH,blobS,bgW,bgH,bgS,alpha,intro,...dotX],()=>{[bar,bg,blob,activeDot,...items].forEach(el=>{el.style.transform='';el.style.width='';el.style.height='';el.style.transition='';el.style.opacity=''});bg.style.removeProperty('--alpha')})}
 function checkBar(){const r=bar.getBoundingClientRect();if(r.height&&r.top>=0&&r.bottom<=innerHeight){removeEventListener('scroll',checkBar);removeEventListener('resize',checkBar);showBar()}}
 addEventListener('scroll',checkBar,{passive:true});addEventListener('resize',checkBar);checkBar();document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',refresh);state(0,false);refresh();
 const video=document.querySelector('#dinnerVideo');let videoVisible=false;
