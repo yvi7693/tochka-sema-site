@@ -508,3 +508,19 @@ body .steps .step-inner p{font-size:16px!important;line-height:1.7}
 .callback-toggle .callback-icon{display:block;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .callback-widget.expanded{left:12px;right:12px;width:auto;padding:24px}
 }
+
+/* refresh32: карточки меню — фото на всю карточку, подпись и заголовок поверх снизу на затемнении;
+   описание выезжает при наведении или фокусе с клавиатуры. На устройствах без наведения описание видно сразу. */
+#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:var(--photo-radius,16px);background:#1a120d;color:#fff;box-shadow:none;outline:none}
+#menu .kitchen-item figure{position:absolute;inset:0;margin:0;border-radius:0;height:auto;aspect-ratio:auto}
+#menu .kitchen-item figure img{width:100%;height:100%;object-fit:cover;border-radius:0}
+#menu .kitchen-item figure::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,10,0) 40%,rgba(20,14,10,.55) 68%,rgba(20,14,10,.88) 100%);transition:opacity .4s}
+#menu .kitchen-item>div{position:absolute;left:0;right:0;bottom:0;padding:24px;background:none}
+body #menu .kitchen-grid .kitchen-item .dish-label{min-height:0;font-size:12px!important;letter-spacing:.12em;color:#f3b48f}
+body #menu .kitchen-grid .kitchen-item h3{margin:8px 0 0;color:#fff;font-size:26px}
+body #menu .kitchen-grid .kitchen-item p{font-size:15px!important;line-height:1.6;color:#f1e6dd;max-height:0;opacity:0;transform:translateY(10px);overflow:hidden;margin:0;transition:max-height .5s cubic-bezier(.215,.61,.355,1),opacity .35s ease,transform .5s cubic-bezier(.215,.61,.355,1),margin .5s cubic-bezier(.215,.61,.355,1)}
+body #menu .kitchen-grid .kitchen-item:hover p,body #menu .kitchen-grid .kitchen-item:focus-visible p,body #menu .kitchen-grid .kitchen-item:focus-within p{max-height:8em;opacity:1;transform:none;margin-top:10px}
+#menu .kitchen-item:focus-visible{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--accent)}
+@media(hover:hover){#menu .kitchen-item:hover{transform:none;box-shadow:none}#menu .kitchen-item:hover img{transform:scale(1.04)}}
+@media(hover:none){body #menu .kitchen-grid .kitchen-item p{max-height:none;opacity:1;transform:none;margin-top:10px}}
+@media(max-width:760px){#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{aspect-ratio:1/1}#menu .kitchen-item>div{padding:20px}body #menu .kitchen-grid .kitchen-item h3{font-size:24px}body #menu .kitchen-grid .kitchen-item p{max-height:none;opacity:1;transform:none;margin-top:8px}}
