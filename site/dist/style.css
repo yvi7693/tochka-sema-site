@@ -489,39 +489,6 @@ body .steps .step-inner p{font-size:16px!important;line-height:1.7}
 @media(max-width:1024px){#contact .contact-grid>div{grid-column:1 / span 5}#contact .contact-grid>form{grid-column:6 / span 7}}
 @media(max-width:760px){#contact .contact-grid>div,#contact .contact-grid>form{grid-column:1 / -1}#contact .form-row{column-gap:14px}}
 
-/* refresh20: «У Сэма на огне» — вкладки. Сетка 12 колонок как у контактов: фото — 1–7, текст — 9–12. */
-#menu .menu-tabs{max-width:1210px;margin:40px auto 0}
-.menu-tablist{display:flex;gap:8px;margin-bottom:24px;overflow-x:auto;scrollbar-width:none}
-.menu-tablist::-webkit-scrollbar{display:none}
-.menu-tab{flex:none;min-height:44px;padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font:500 15px/1.2 Manrope,Arial,sans-serif;white-space:nowrap;transition:background-color .2s,color .2s,border-color .2s}
-.menu-tab:hover{border-color:var(--ink)}
-.menu-tab[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.menu-tab:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.menu-panels{display:grid}
-.menu-panel{grid-area:1 / 1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:center;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s;outline:none}
-.menu-panel[hidden]{display:grid}
-.menu-panel.is-active{opacity:1;visibility:visible;transition:opacity .35s ease}
-.menu-panel figure{grid-column:1 / span 7;aspect-ratio:3/2;overflow:hidden;border-radius:var(--photo-radius,16px);background:var(--menu-bg)}
-.menu-panel figure img{height:100%}
-.menu-panel-text{grid-column:9 / span 4}
-.menu-panel-text .dish-label{display:block;font-size:12px;font-weight:600;letter-spacing:1.5px;color:var(--faq-accent,var(--accent))}
-.menu-panel-text h3{margin:14px 0 14px;font-family:'Roboto Slab',Georgia,serif;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.03em;line-height:1.15}
-body .menu-panel-text p{font-size:17px!important;line-height:1.7;color:var(--muted)}
-#menu .menu-wide-cta{max-width:1210px;margin:32px auto 0}
-@media(max-width:1024px){.menu-panel figure{grid-column:1 / span 7}.menu-panel-text{grid-column:8 / span 5}}
-@media(max-width:760px){
-#menu .menu-tabs{margin-top:28px}
-.menu-tablist{margin:0 -6% 18px;padding:0 6%}
-.menu-tab{font-size:14px;padding:10px 16px}
-.menu-panel{grid-template-columns:1fr;row-gap:18px;align-items:start}
-.menu-panel figure,.menu-panel-text{grid-column:1}
-.menu-panel-text h3{font-size:26px;margin:10px 0}
-body .menu-panel-text p{font-size:15px!important}
-}
-@media(max-width:760px){.menu-tablist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px;padding:0;overflow:visible}.menu-tab{padding:10px 6px;font-size:13px;white-space:normal;text-align:center;line-height:1.2}}
-
-/* refresh26: до появления (см. app.js) кнопки-вкладки скрыты. */
-.menu-tablist.is-waiting .menu-tab{opacity:0}
 
 /* refresh27: до первого появления (см. steps.js) этапы скрыты. */
 .steps-list.is-waiting .step{opacity:0}
