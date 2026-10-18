@@ -291,3 +291,119 @@ body #faq details p{font-size:20px!important;line-height:1.6}
 #faq .faq-heading,#faq .faq-grid>div:last-child{grid-column:1/-1;width:100%;max-width:none;text-align:left}
 #faq details p{max-width:calc((100% - 24px)*.833333);margin-left:0}
 @media(max-width:760px){#faq .faq-grid{column-gap:12px;row-gap:20px}#faq details p{max-width:100%}}
+
+/* refresh1: одна палитра, свёрнутый виджет, контрастные кнопки, мобильная навигация, подвал с контактами. */
+:root{--cta:#c2410c;--cta-hover:#a8370a}
+.hero-bottom .button,.gathering-copy .button,.contact .button{background:var(--cta);border-color:var(--cta);color:#fff;font-weight:600}
+.hero-bottom .button:hover,.gathering-copy .button:hover,.contact .button:hover{background:var(--cta-hover);border-color:var(--cta-hover);color:#fff}
+.scroll-hint a{opacity:.8}.scroll-hint a:hover{opacity:1}
+
+.callback-widget{padding:0;width:auto;bottom:24px;right:24px;border-radius:999px;overflow:visible}
+.callback-toggle{display:block;background:#fdfaf6;color:#2b2b2b;border:0;border-radius:999px;padding:14px 48px 14px 22px;font:600 15px/1.4 Manrope,Arial,sans-serif}
+.callback-toggle:before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cta);margin-right:10px;vertical-align:middle}
+.callback-close{top:50%;transform:translateY(-50%);right:6px;font-size:22px}
+.callback-widget:not(.expanded) .callback-body{display:none}
+.callback-widget.expanded{width:350px;padding:28px;border-radius:22px;overflow:auto}
+.callback-widget.expanded .callback-toggle{display:none}
+.callback-widget.expanded .callback-close{top:8px;transform:none;font-size:28px}
+
+.contact-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.contact label{font-size:12px}
+.contact .button{width:100%;margin-top:6px}
+.form-extra summary span{vertical-align:baseline;margin-left:6px}
+
+footer{display:grid;grid-template-columns:1.4fr 1fr 1fr;align-items:start;gap:32px;text-align:left;padding:48px max(8%,calc((100% - 1210px)/2)) 40px}
+footer .brand{justify-self:start}
+.footer-about p{margin-top:14px;max-width:320px;font-size:13px;line-height:1.6;color:#d4cfc4;white-space:normal}
+.footer-nav{display:flex;flex-direction:column;gap:10px;font-size:13px}
+.footer-nav a,.footer-contact a{color:#eeeae2;opacity:.85}.footer-nav a:hover,.footer-contact a:hover{opacity:1}
+.footer-contact{display:flex;flex-direction:column;gap:10px;font-size:13px;justify-self:end;text-align:right}
+.footer-contact .footer-phone{font-size:18px;font-weight:600;opacity:1}
+.footer-contact span{font-size:11px;color:#a8a299;margin-top:8px}
+.mobile-cta{display:none}
+
+@media(max-width:760px){
+.contact-grid{grid-template-columns:1fr}
+footer{grid-template-columns:1fr;text-align:left;gap:26px;padding:40px 6% 96px}
+.footer-contact{justify-self:start;text-align:left}
+.footer-nav{flex-direction:row;flex-wrap:wrap;gap:10px 20px}
+.callback-widget{display:none!important}
+.mobile-cta{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;z-index:30;left:12px;right:12px;bottom:12px;padding:6px;border-radius:16px;background:#1a120df2;box-shadow:0 8px 30px #0004;backdrop-filter:blur(8px)}
+.mobile-cta a{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:12px;font-size:14px;font-weight:600;color:#f8f5ef}
+.mobile-cta a:last-child{background:var(--cta);color:#fff}
+.scroll-hint{bottom:90px}
+}
+header .brand{white-space:nowrap}
+
+/* refresh2: этапы работы — закреплённая секция, активный шаг раскрывается по прокрутке. */
+.steps{position:relative;height:300svh;background:var(--paper);color:var(--ink)}
+.steps-sticky{position:sticky;top:0;height:100svh;max-width:1440px;margin:auto;padding:64px 8%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:64px;overflow:hidden}
+.steps-head{grid-column:1;grid-row:1}
+.steps-head .eyebrow{color:var(--accent);margin-bottom:14px}
+.steps-head h2{font-size:clamp(29px,3vw,42px);font-family:var(--heading-font,'Roboto Slab'),Georgia,serif}
+.steps-visual{grid-column:2;grid-row:1 / 3;position:relative;border-radius:var(--photo-radius,16px);overflow:hidden;background:var(--menu-bg)}
+.steps-visual img{position:absolute;inset:0;height:100%;opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.2s cubic-bezier(.215,.61,.355,1)}
+.steps-visual img.active{opacity:1;transform:none}
+.steps-list{grid-column:1;grid-row:2;align-self:end;list-style:none;margin:0;padding:0}
+.step{opacity:.4;transition:opacity .4s,padding .4s}
+.step:not(:last-child){margin-bottom:22px}
+.step.is-active{opacity:1;padding:10px 0}
+.step-head{display:flex;align-items:flex-end;gap:0;width:100%;min-height:28px;padding:0 0 0 64px;position:relative;border:0;background:none;color:inherit;text-align:left}
+.step-num{position:absolute;left:0;bottom:3px;font-size:11px;font-weight:600;letter-spacing:1.5px;font-variant-numeric:tabular-nums;color:var(--accent)}
+.step-title{font-size:12px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;line-height:1.2;transition:font-size .4s cubic-bezier(.215,.61,.355,1)}
+.step.is-active .step-title{font-family:'Roboto Slab',Georgia,serif;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.03em;text-transform:none;font-weight:700;line-height:1.1}
+.step-body{max-height:0;overflow:hidden;padding-left:64px;transition:max-height .5s cubic-bezier(.215,.61,.355,1)}
+.step.is-active .step-body{max-height:12rem}
+.step-inner{position:relative}
+.step-progress{position:absolute;left:-58px;top:18px;bottom:2px;width:2px;background:var(--line)}
+.step-progress i{position:absolute;inset:0;background:var(--accent);transform:scaleY(var(--fill,0));transform-origin:top}
+.step-inner p{padding-top:16px;max-width:420px;font-size:16px;line-height:1.7;color:var(--muted);opacity:0;transition:opacity .5s}
+.step.is-active .step-inner p{opacity:1;transition-delay:.1s}
+.steps.is-static{height:auto}
+.steps.is-static .steps-sticky{position:static;height:auto;min-height:620px}
+@media(max-width:760px){
+.steps-sticky{grid-template-columns:1fr;grid-template-rows:auto minmax(120px,1fr) auto;padding:28px 6% 92px;row-gap:22px}
+.steps-head h2{font-size:28px}
+.steps-visual{grid-column:1;grid-row:2}
+.steps-list{grid-row:3}
+.step:not(:last-child){margin-bottom:16px}
+.step-head,.step-body{padding-left:44px}
+.step-progress{left:-40px}
+.step.is-active .step-title{font-size:26px}
+.step-inner p{padding-top:12px;font-size:15px;line-height:1.6}
+.steps.is-static .steps-sticky{min-height:0}
+.steps.is-static .steps-visual{aspect-ratio:4/3}
+}
+body .steps .step-inner p{font-size:16px!important;line-height:1.7}
+@media(max-width:760px){body .steps .step-inner p{font-size:15px!important;line-height:1.6}}
+
+/* refresh4: анимации появления. Работают только с классом .motion (его ставит motion.js, при reduced motion — нет). */
+:root{--ease-out:cubic-bezier(.215,.61,.355,1)}
+.motion .split .word{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.motion .split .word>span{display:inline-block;transform:translate3d(0,105%,0) rotate(4deg);transform-origin:left bottom;transition:transform .9s var(--ease-out)}
+.motion .split.is-in .word>span{transform:none}
+.motion .reveal{opacity:0;transform:translate3d(0,32px,0);transition:opacity .8s var(--ease-out),transform .9s var(--ease-out);transition-delay:var(--d,0ms)}
+.motion .reveal.is-in{opacity:1;transform:none}
+.motion .hero-bottom>.reveal{--d:350ms}.motion .hero-bottom>.reveal+.reveal{--d:480ms}.motion .scroll-hint.reveal{--d:700ms}
+.motion .kitchen-item figure,.motion .gallery-visual figure{overflow:hidden}
+.motion .kitchen-item.reveal img{transform:scale(1.18);transition:transform 1.4s var(--ease-out);transition-delay:var(--d,0ms)}
+.motion .kitchen-item.reveal.is-in img{transform:scale(1)}
+.motion .steps-visual.reveal{clip-path:inset(12% 8% 12% 8% round 24px);opacity:1;transform:none;transition:clip-path 1.2s var(--ease-out)}
+.motion .steps-visual.reveal.is-in{clip-path:inset(0 round 0)}
+.gathering{overflow:hidden}
+.motion .gathering video{will-change:transform}
+/* Наведение: карточки приподнимаются, фото приближается, кнопки откликаются. */
+.kitchen-item{transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
+.kitchen-item img{transition:transform 1s var(--ease-out)}
+@media(hover:hover){
+.kitchen-item:hover{transform:translateY(-6px);box-shadow:0 18px 40px #2b1a1018}
+.motion .kitchen-item.reveal.is-in:hover img,.kitchen-item:hover img{transform:scale(1.06)}
+.button,.text-link,.callback-toggle,.mobile-cta a{transition:transform .25s var(--ease-out),background .2s,box-shadow .25s}
+.button:hover,.callback-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 24px #c2410c33}
+.footer-nav a,.footer-contact a{transition:opacity .2s,transform .25s var(--ease-out)}
+.footer-nav a:hover{transform:translateX(4px)}
+}
+.button:active,.mobile-cta a:active{transform:scale(.97)}
+.scroll-hint a{display:inline-block;animation:hint 2.4s ease-in-out infinite}
+@keyframes hint{0%,100%{transform:none}50%{transform:translateY(5px)}}
+@media(prefers-reduced-motion:reduce){.scroll-hint a{animation:none}.kitchen-item:hover{transform:none}}

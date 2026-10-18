@@ -1,16 +1,8 @@
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-const names={armorwhite:'Белый и персик',armor:'Armor — персик и уголь',quoti:'Коралл и графит',flames:'Game & Flames',fire:'Жар и свет',camp:'Тёплый костёр',steel:'Дым и сталь',olive:'Олива и лён',wine:'Вино и сливки',sand:'Песок и графит',night:'Ночь и медь',ember:'Уголь и жар',copper:'Олива и медь',sea:'Дым и море',wood:'Дерево и угли'};function theme(value){if(!names[value])return;document.body.dataset.theme=value;document.querySelectorAll('.theme').forEach(b=>{const yes=b.dataset.palette===value;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes))});document.querySelector('#theme-name').textContent=names[value];try{localStorage.setItem('catering-palette',value)}catch{}}
-document.querySelectorAll('.theme').forEach(b=>b.addEventListener('click',()=>theme(b.dataset.palette)));try{if(localStorage.getItem('catering-palette-version')!=='white39'){theme('armorwhite');localStorage.setItem('catering-palette-version','white39')}else theme(localStorage.getItem('catering-palette')||'armorwhite')}catch{}
 document.querySelectorAll('[data-event]').forEach(b=>b.addEventListener('click',()=>{document.querySelector('[name=wishes]').value=b.dataset.event;document.querySelector('#contact').scrollIntoView({behavior:reduced.matches?'instant':'smooth'})}));
 document.querySelector('#inquiry').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.target);document.querySelector('#request-text').value=`Хочу обсудить мероприятие.\nИмя: ${d.get('name')}\nКонтакт: ${d.get('contact')}\nДата: ${d.get('date')||'уточним'}\nГостей: ${d.get('guests')||'уточним'}\nПожелания: ${d.get('wishes')||'обсудим вместе'}`;document.querySelector('#form-result').hidden=false});document.querySelector('#copy').addEventListener('click',async e=>{const t=document.querySelector('#request-text');try{await navigator.clipboard.writeText(t.value);e.target.textContent='Скопировано ✓'}catch{t.select();e.target.textContent='Выделено — скопируйте текст'}});
 
-(()=>{
-const gallery=document.querySelector('#foodGallery'),images=[...gallery.querySelectorAll('.food-gallery-frame img')],caption=document.querySelector('#foodCaption'),dots=document.querySelector('#foodDots'),names=['Стейк с гарниром','Шашлык на мангале','Рыба с овощами'];let i=0,timer=null,visible=false;
-names.forEach((name,n)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',name);b.addEventListener('click',()=>{show(n);refresh()});dots.append(b)});
-function show(next){i=(next+images.length)%images.length;images.forEach((img,n)=>{img.classList.toggle('active',n===i);img.setAttribute('aria-hidden',String(n!==i))});caption.textContent=names[i];dots.querySelectorAll('button').forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)))}
-function refresh(){clearInterval(timer);if(visible&&!document.hidden&&!reduced.matches)timer=setInterval(()=>show(i+1),3000)}
-new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;refresh()},{threshold:.1}).observe(gallery);document.addEventListener('visibilitychange',refresh);reduced.addEventListener('change',refresh);show(0);
-})();
+
 
 
 
