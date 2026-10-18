@@ -19,10 +19,10 @@ requestAnimationFrame(()=>document.querySelectorAll('.hero-copy h1,.hero-bottom>
 const video=document.querySelector('.gathering video'),section=document.querySelector('.gathering');let raf=0;
 function parallax(){raf=0;const r=section.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;const p=(r.top+r.height/2-innerHeight/2)/innerHeight;video.style.transform=`translate3d(0,${p*-24}px,0) scale(1.06)`}
 if(video&&section){addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(parallax)},{passive:true});parallax()}
-// Блок «Вопросы и ответы»: при первом появлении сначала подпись, заголовок и пояснение, затем вопросы —
+// Блок «Вопросы и ответы»: при первом появлении сначала подпись, заголовок и пояснение, затем окно переписки (или вопросы, если чата нет) —
 // по очереди (через 70 мс) поднимаются на пружине (жёсткость 200, демпфирование 20), как этапы и кнопки меню.
 const faq=document.querySelector('#faq');
-if(faq){const parts=[...faq.querySelectorAll('.faq-heading>*'),...faq.querySelectorAll('details')];
+if(faq){const parts=[...faq.querySelectorAll('.faq-heading>*'),...[...faq.querySelectorAll('.faq-chat, details')].filter(el=>!el.closest('[hidden]'))];
 const frames=[],h=1/240;let x=1,v=0,t=0;while(t<3){for(let n=0;n<4;n++){v+=(-200*x-20*v)*h;x+=v*h;t+=h}frames.push(x);if(Math.abs(x)<.002&&Math.abs(v)<.002)break}frames.push(0);
 const rise=frames.map(x=>({transform:`translateY(${(x*40).toFixed(2)}px)`})),riseDuration=frames.length*1000/60;
 faq.classList.add('is-waiting');
