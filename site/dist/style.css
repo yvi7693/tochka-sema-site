@@ -521,8 +521,5 @@ body .menu-panel-text p{font-size:15px!important}
 }
 @media(max-width:760px){.menu-tablist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px;padding:0;overflow:visible}.menu-tab{padding:10px 6px;font-size:13px;white-space:normal;text-align:center;line-height:1.2}}
 
-/* refresh24: при смене вкладки панель меняется сразу, а движение и прозрачность у фото и текста задаёт app.js. */
-.menu-panels{overflow:clip}
-.menu-panel{transition:opacity 0s .3s,visibility 0s .3s}
-.menu-panel.is-active{transition:none}
-@media(prefers-reduced-motion:reduce){.menu-panel{transition:opacity .2s ease,visibility 0s .2s}}
+/* refresh26: до появления (см. app.js) кнопки-вкладки скрыты. */
+.menu-tablist.is-waiting .menu-tab{opacity:0}
