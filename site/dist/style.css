@@ -579,18 +579,3 @@ body footer{grid-template-columns:1fr auto;align-items:center;padding-top:32px;p
 .footer-about p{margin-top:10px;max-width:none}
 @media(max-width:760px){body footer{grid-template-columns:1fr;padding-top:28px;padding-bottom:96px;gap:18px}}
 
-/* refresh49: блок «С чего начнём?» — белый: тёмный текст, светлые поля формы. Подвал остаётся тёмным. */
-body[data-theme] #contact{background:#fff;color:var(--ink);border-top:0}
-#contact h2{color:var(--ink)}
-#contact h2 em{color:var(--accent)}
-#contact .contact-grid>div>p{color:var(--muted)}
-#contact label{color:var(--ink)}
-#contact input,#contact textarea{border:1px solid var(--line);background:#fff;color:var(--ink);color-scheme:light}
-#contact input::placeholder,#contact textarea::placeholder{color:#9a8f86}
-#contact input:hover,#contact textarea:hover{border-color:#c9b7a9}
-#contact input:focus,#contact textarea:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 1px var(--accent)}
-#contact input:-webkit-autofill,#contact textarea:-webkit-autofill{-webkit-text-fill-color:var(--ink);box-shadow:0 0 0 1000px #fff inset;caret-color:var(--ink)}
-#contact .form-extra summary,#contact .form-extra summary span{color:var(--muted)}
-#contact #form-result{border-color:var(--line)}
-#contact #copy{background:transparent;border:1px solid var(--line);color:var(--ink)}
-#contact #copy:hover{background:#faf5f0;border-color:var(--ink);color:var(--ink)}
