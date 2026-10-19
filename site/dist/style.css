@@ -586,3 +586,11 @@ body #faq .faq-msg--guest .faq-bubble{border-radius:18px 18px 4px 18px;backgroun
 @media(prefers-reduced-motion:reduce){.faq-msg{animation:none}.faq-msg.is-typing .faq-bubble i{animation:none}}
 @media(max-width:760px){#faq .faq-heading,#faq .faq-grid>div:last-child{grid-column:1 / -1}.faq-chat{padding:16px;border-radius:20px}body #faq .faq-bubble{font-size:15px!important;max-width:88%}.faq-chip{font-size:14px}}
 @media(min-width:761px){#faq .faq-heading{position:sticky;top:96px}}
+
+/* refresh42: два варианта первого экрана. По умолчанию — видео привязано к прокрутке (canvas, media.js);
+   с ?hero=video — обычное видео, которое крутится само по кругу. */
+.hero-video{display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:60% center}
+[data-hero=video] .hero-video{display:block}
+[data-hero=video] #grillCanvas{display:none}
+[data-hero=video] .hero-scroll{height:auto}
+[data-hero=video] .hero-sticky{position:relative;height:100vh;height:100svh}

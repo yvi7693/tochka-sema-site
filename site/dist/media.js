@@ -1,5 +1,13 @@
 // Selected Pexels clip: 8523251, native 30 fps; bounded decoded-frame cache.
+// Вариант первого экрана «просто видео» (?hero=video): ролик крутится сам, кадры по прокрутке не грузятся.
 (()=>{
+if(document.documentElement.dataset.hero!=='video')return;
+const video=document.querySelector('.hero-video'),reduce=matchMedia('(prefers-reduced-motion: reduce)');if(!video)return;
+video.preload='auto';function sync(){if(reduce.matches||document.hidden)video.pause();else video.play().catch(()=>{})}
+new IntersectionObserver(e=>{e[0].isIntersecting?sync():video.pause()}).observe(video);document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
+})();
+(()=>{
+if(document.documentElement.dataset.hero==='video')return;
 const canvas=document.querySelector('#grillCanvas'),hero=document.querySelector('#hero'),button=document.querySelector('#mediaToggle'),ctx=canvas.getContext('2d',{alpha:false}),reduce=matchMedia('(prefers-reduced-motion: reduce)');
 const total=190,cache=new Map(),pending=new Map();let paused=reduce.matches,target=0,current=0,drawn=-1,raf=0,last=0;
 function draw(i){const img=cache.get(i);if(!img||i===drawn)return;const s=Math.max(canvas.width/img.width,canvas.height/img.height),w=img.width*s,h=img.height*s;ctx.drawImage(img,(canvas.width-w)/2,(canvas.height-h)/2,w,h);drawn=i;canvas.dataset.frame=String(i)}
