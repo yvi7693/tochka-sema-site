@@ -556,3 +556,26 @@ body #menu .kitchen-grid .kitchen-item:hover p,body #menu .kitchen-grid .kitchen
 #menu .kitchen-item>div{z-index:2}
 @media(max-width:760px){#menu .kitchen-item figure{padding-bottom:100%}}
 @supports not (aspect-ratio:1/1){#menu .kitchen-item,body[data-theme=armorwhite] #menu .kitchen-item{height:auto;padding-bottom:0}}
+
+/* refresh42: два варианта первого экрана. По умолчанию — видео привязано к прокрутке (canvas, media.js);
+   с ?hero=video — обычное видео, которое крутится само по кругу. */
+.hero-video{display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:60% center}
+[data-hero=video] .hero-video{display:block}
+[data-hero=video] #grillCanvas{display:none}
+[data-hero=video] .hero-scroll{height:auto}
+[data-hero=video] .hero-sticky{position:relative;height:100vh;height:100svh}
+
+/* refresh44: в блоке этапов фото по высоте равно колонке «заголовок + этапы» (а не всему экрану);
+   содержимое вместе стоит по центру закреплённого экрана. Только на компьютере, на телефоне раскладка прежняя. */
+@media(min-width:761px){
+.steps-sticky{grid-template-rows:auto;align-content:center;align-items:stretch}
+.steps-visual{align-self:stretch;min-height:0}
+.steps-list{min-height:260px}
+}
+@media(min-width:1200px){.steps-list{min-height:240px}}
+
+/* refresh46: меню разделов из подвала убрано — подвал в две колонки (о компании слева, телефон справа) и ниже. */
+body footer{grid-template-columns:1fr auto;align-items:center;padding-top:32px;padding-bottom:32px;gap:24px}
+.footer-about p{margin-top:10px;max-width:none}
+@media(max-width:760px){body footer{grid-template-columns:1fr;padding-top:28px;padding-bottom:96px;gap:18px}}
+
