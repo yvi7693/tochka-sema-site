@@ -573,3 +573,8 @@ body #menu .kitchen-grid .kitchen-item:hover p,body #menu .kitchen-grid .kitchen
 .steps-list{min-height:260px}
 }
 @media(min-width:1200px){.steps-list{min-height:240px}}
+
+/* refresh46: меню разделов из подвала убрано — подвал в две колонки (о компании слева, телефон справа) и ниже. */
+body footer{grid-template-columns:1fr auto;align-items:center;padding-top:32px;padding-bottom:32px;gap:24px}
+.footer-about p{margin-top:10px;max-width:none}
+@media(max-width:760px){body footer{grid-template-columns:1fr;padding-top:28px;padding-bottom:96px;gap:18px}}

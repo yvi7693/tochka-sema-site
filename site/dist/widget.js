@@ -12,8 +12,7 @@ widget.querySelector('.callback-close').addEventListener('click',()=>{if(widget.
 function expand(){widget.classList.add('expanded');toggle.setAttribute('aria-expanded','true');widget.querySelector('input').focus({preventScroll:true})}
 toggle.addEventListener('click',expand);
 // Кнопки «Обсудить мероприятие», «Собрать своё меню» и другие ссылки на форму открывают виджет вместо прокрутки к форме.
-// Ссылка «Контакты» в меню подвала остаётся обычной навигацией.
-document.addEventListener('click',e=>{const link=e.target.closest('a[href="#contact"]');if(!link||link.closest('.footer-nav')||link.closest('#contact'))return;e.preventDefault();forced=true;closed=false;done=false;refresh();expand()});
+document.addEventListener('click',e=>{const link=e.target.closest('a[href="#contact"]');if(!link||link.closest('#contact'))return;e.preventDefault();forced=true;closed=false;done=false;refresh();expand()});
 widget.addEventListener('keydown',e=>{if(e.key==='Escape'&&widget.classList.contains('expanded'))collapse()});
 form.addEventListener('submit',async e=>{e.preventDefault();const data=new FormData(form),phone=String(data.get('phone')).trim();if(phone.replace(/\D/g,'').length<10){form.elements.phone.setCustomValidity('Введите номер телефона полностью');form.elements.phone.reportValidity();return}const value=`Хочу обсудить событие.\nИмя: ${data.get('name')}\nТелефон: ${phone}`;widget.querySelector('.callback-result').hidden=false;widget.querySelector('textarea').value=value;widget.querySelector('.callback-result p').textContent='Контакт подготовлен. Скопируйте его для передачи менеджеру.';});
 form.elements.phone.addEventListener('input',()=>form.elements.phone.setCustomValidity(''));
