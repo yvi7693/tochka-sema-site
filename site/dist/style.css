@@ -564,3 +564,12 @@ body #menu .kitchen-grid .kitchen-item:hover p,body #menu .kitchen-grid .kitchen
 [data-hero=video] #grillCanvas{display:none}
 [data-hero=video] .hero-scroll{height:auto}
 [data-hero=video] .hero-sticky{position:relative;height:100vh;height:100svh}
+
+/* refresh44: в блоке этапов фото по высоте равно колонке «заголовок + этапы» (а не всему экрану);
+   содержимое вместе стоит по центру закреплённого экрана. Только на компьютере, на телефоне раскладка прежняя. */
+@media(min-width:761px){
+.steps-sticky{grid-template-rows:auto;align-content:center;align-items:stretch}
+.steps-visual{align-self:stretch;min-height:0}
+.steps-list{min-height:260px}
+}
+@media(min-width:1200px){.steps-list{min-height:240px}}
