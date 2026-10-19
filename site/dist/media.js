@@ -3,7 +3,10 @@
 (()=>{
 if(document.documentElement.dataset.hero!=='video')return;
 const video=document.querySelector('.hero-video'),reduce=matchMedia('(prefers-reduced-motion: reduce)');if(!video)return;
-video.preload='auto';function sync(){if(reduce.matches||document.hidden)video.pause();else video.play().catch(()=>{})}
+video.muted=true;video.autoplay=true;video.preload='auto';
+// Если браузер не дал запустить ролик сам (Safari в режиме энергосбережения и т. п.), запускаем его при первом касании или прокрутке.
+function retry(){['touchstart','pointerdown','scroll','keydown'].forEach(t=>removeEventListener(t,retry));sync()}
+function sync(){if(reduce.matches||document.hidden){video.pause();return}const p=video.play();if(p&&p.catch)p.catch(()=>{['touchstart','pointerdown','scroll','keydown'].forEach(t=>addEventListener(t,retry,{once:true,passive:true}))})}
 new IntersectionObserver(e=>{e[0].isIntersecting?sync():video.pause()}).observe(video);document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
 })();
 (()=>{
